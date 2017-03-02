@@ -322,7 +322,7 @@ _دريافت مخاطبان ذخيره شده توسط ربات_
         limit_ = 999999999
       }, add_all, {})
       save_log("User " .. msg.sender_user_id_ .. ", Used AddMembers In " .. msg.chat_id_)
-      return "Adding members to group...*Open by @sajjad_021*"
+      return "Adding members to group..."
     elseif text_:match("^[!/#]contactlist$") then
       tdcli_function({
         ID = "SearchContacts",
@@ -434,7 +434,6 @@ _دريافت مخاطبان ذخيره شده توسط ربات_
           }, dl_cb, nil)
         else
           local text = [[
-<b>Normal Stats</b>Open by @sajjad_021:)
 Users : ]] .. tostring(pvs) .. [[
 
 Groups : ]] .. tostring(gps) .. [[
@@ -498,7 +497,7 @@ Saved Contacts : ]] .. tostring(contacts)
         if matches[2] == "on" then
           redis:set("tabchi:" .. tostring(tabchi_id) .. ":markread", true)
           save_log("User " .. msg.sender_user_id_ .. ", Turned On Markread")
-          return "Markread Turned On*Tabchi v4 mod by @sajjad_021*"
+          return "Markread Turned On"
         elseif matches[2] == "off" then
           redis:del("tabchi:" .. tostring(tabchi_id) .. ":markread")
           save_log("User " .. msg.sender_user_id_ .. ", Turned Off Markread")
